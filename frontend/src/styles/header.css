@@ -1,0 +1,146 @@
+header{
+    background-color: var(--primaryBackgroundColor);
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    width: calc(100% - 2rem);
+    justify-content: space-between;
+}
+
+.logo-container{
+    color: #FFFF;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 3rem;
+    gap: 10px;
+}
+
+h4{
+    color: var(--secondaryTextColor);
+}
+
+.menu-btn{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+
+    & > a{
+        text-decoration: none;
+        color: #FFFF;
+        transition: 0.2s;
+    }
+
+    & > a:hover{
+        text-decoration: none;
+        color: #4f9cf9;
+    }
+}
+
+.notif-container{
+    position: relative;
+}
+
+.footer{
+    margin: 0 3rem 0rem 0;
+}
+
+/* .logo-img, .search-icon{
+    display: none;
+
+    & > svg {
+        display: none;
+    }
+} */
+
+@media only screen and (max-width: 850px) {
+    header {
+        margin: 0;
+        gap: 15%;
+        left: 0;
+        width: 92%;
+    }
+
+    header > h4 {
+        display: none;
+    }
+
+    .inp-search {
+        display: flex;
+    }
+
+    .search-icon {
+        display: flex;
+        border: none;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    header {
+        padding: 0 .8rem;
+        height: 55px;
+    }
+
+    .search-icon {
+        display: flex;
+        border: 1px solid var(--borderInputColor);
+        align-items: center;
+        padding: 0 5px;
+        color: var(--buttonColor);
+        border-radius: var(--borderRadius);
+    }
+
+    .search-icon > svg {
+        display: block;
+        font-size: 20px;
+    }
+
+    .footer {
+        gap: .5rem;
+    }
+
+    .inp-search {
+        display: flex;
+        padding: 3px;
+        width: 100%;
+
+        & > svg {
+            font-size: 20px;
+        }
+    }
+
+    .notif-icon {
+        padding: 7px;
+
+        & > svg{
+            font-size: 20px;
+        }  
+    }
+
+    .settings{
+        padding: 7px;
+
+        & > svg{
+            font-size: 20px;
+        }
+    }
+
+    .menu-btn{
+        padding: 7px;
+    
+        & > svg{
+            font-size: 20px;
+        }
+    }
+}
