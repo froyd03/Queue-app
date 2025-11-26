@@ -1,6 +1,8 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './portals/LandingPage';
 import LoginPage from './portals/LoginPage';
+
+import StaffDashboard from './portals/staff/StaffDashoard';
 import './styles/global.css';
 
 export default function App(){
@@ -14,21 +16,9 @@ return (
         </Routes>
 
         {/* staff portal */}
-        {/* <Routes>
-            <Route path='/staff' element={''}/>
-            <Route 
-                path='/dashboard' 
-                element={
-                    ''
-                }
-            />
-            <Route 
-                path='/inventory'
-                element={
-                ''
-                }
-            />
-        </Routes> */}
+        <Routes>
+            <Route path='/staff' element={<StaffDashboard />}/>
+        </Routes>
 
         {/* student portal */}
         {/* <Routes>

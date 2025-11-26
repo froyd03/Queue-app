@@ -1,18 +1,54 @@
 import { useEffect, useState } from 'react'
 import '../styles/login.css'
+import axios from '../utils/axios.js'
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage(){
 
     const [loginData, setLoginData] = useState({});
+
     const handleInput = (e) => {
         const key = e.target.name;
         const value = e.target.value;
         setLoginData(data => ({...data, [key]: value}))
+        setLoginMessage("");
     }
 
-    const handleSubmitForm = (e) => {
-        console.log("submitted")
+    const navigate = useNavigate();
+    const [loginMessage, setLoginMessage] = useState("");
+
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        try{
+            const {data} = await axios.post('/user/login', loginData);
+            if(data.status){
+                localStorage.setItem("token", data.response);
+                if(data.role === "student"){
+                    navigate('/student')
+                }
+                else if(data.role === "staff"){
+                    navigate('/staff')
+                }
+                else if(data.role === "admin"){
+                    navigate('/admin')
+                }
+                else{
+                    setLoginMessage("User role doesn't exist!");
+                    setLoginData(data => "")
+                }
+            }
+            else{
+                setLoginMessage(data.response)
+            }
+        }
+        catch(error){
+            console.error("error submiting form try again!", error);
+        }
     }
+
+    useEffect(() => {
+        console.log(loginData)
+    }, [loginData])
 
     return(
         <div className="main-login-form">
@@ -22,10 +58,10 @@ export default function LoginPage(){
                     <h2>Log in</h2>
                     <form onSubmit={handleSubmitForm} className="login-form">
                         <div className="inputText-container">
-                            <label>Email *</label>
+                            <label>Username *</label>
                             <input 
                                 type="text" 
-                                name='email'
+                                name='userId'
                                 onChange={handleInput} 
                                 placeholder='samplemail@gmail.com'
                             />
@@ -33,8 +69,11 @@ export default function LoginPage(){
                         <div className="inputText-container">
                             <label>Password *</label>
                             <input type="password" name='password' onChange={handleInput}/>
+                            {loginMessage && <label className='login-message'>{loginMessage}</label>}
                         </div>
-                        <button className='btnSubmit'>Log in</button>
+                        <div className="inputText-container">
+                            <button className='btnSubmit'>Log in</button>
+                        </div>
                     </form>
                 </div>
             </div>

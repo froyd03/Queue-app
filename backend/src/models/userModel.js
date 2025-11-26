@@ -26,7 +26,12 @@ export default class UserModel {
 
     async userAuthenticate(userId, password) { //read
         try{
+
             const [user] = await database.query("SELECT * FROM users WHERE userId = ?", [userId]);
+
+            if (!user || user.length === 0) {
+                throw new Error("User does not exist.");
+            }
 
             const isPasswordMatch = await compare(password, user[0].password);
 
@@ -42,7 +47,7 @@ export default class UserModel {
                 else throw new Error("Error login! no token");
 
             }else{
-                return {"response": "email or password incorrect", "status": false}; 
+                return {"response": "username or password is incorrect!", "status": false}; 
             }
         }
         catch(error){

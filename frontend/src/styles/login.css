@@ -71,3 +71,10 @@
         font-size: 36px;
     }
 }
+
+.login-message{
+    color: red;
+    font-size: 13px;
+    margin: 1rem 0 0 0;
+    font-weight: 500;
+}
